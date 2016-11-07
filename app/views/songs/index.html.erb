@@ -12,6 +12,12 @@
 		<th><%= song.name %></th>
 		<th><%= song.singer %></th>
 		<th><%= song.lyrics %></th>
+		<th><%= link_to 'SHOW', song_path(song) %></th>
+		<th><%= link_to 'Edit', edit_song_path(song) %></th>
+		<th><%= link_to 'Delete', song_path(song), method: :delete %></th>
 	</tr>
 	<% end  %>
+
+
 </table>
+<%= link_to "New Song", new_song_path %>

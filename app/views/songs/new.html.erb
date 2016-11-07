@@ -1,23 +1,8 @@
+<h1>New song</h1>
+
 <%= form_for :song, url: songs_path do |f| %>
-	<p>
-    <%= f.label :songname %><br>
-    <%= f.text_field :name %>
-  </p>
- 
-  <p>
-    <%= f.label :singer %><br>
-    <%= f.text_field :singer %>
-  </p>
+	<%= render :partial => 'form', :locals => { :f => f} %>
+  <%= f.submit %>
 
-
-  <p>
-    <%= f.label :lyrics %><br>
-    <%= f.text_field :lyrics %>
-  </p>
-
- 
-  <p>
-    <%= f.submit %>
-  </p>
 <% end %>
-
+<%= link_to "Index", songs_path %>
