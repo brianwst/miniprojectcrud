@@ -1,24 +1,26 @@
 class SongsController < ApplicationController
+	before_action :set_song, :only => [:show, :edit, :update, :destroy]
 
 	def index
 		@songs = Song.all
 	end
 
 	def show
-		@song = Song.find(params[:id])
+		@page_title = @song.name
 	end
 
 	def new
 	end
 
-	def edit 
-		@song = Song.find(params[:id])
+	def edit
+		@page_title = @song.name 
 	end
 
 	def create
 		@song = Song.new(params_screen)
 
 		if @song.save
+			flash[:notice] = "Event was successfully created"
 			redirect_to song_path(@song)
 		else 
 			render 'new'
@@ -26,9 +28,9 @@ class SongsController < ApplicationController
 	end
 
 	def update
-		@song = Song.find(params[:id])
 
 		if @song.update(params_screen)
+			flash[:notice] = "Event was successfully updated"
 			redirect_to song_path(@song)
 		else
 			render 'edit'
@@ -36,14 +38,17 @@ class SongsController < ApplicationController
 	end
 
 	def destroy
-		@song = Song.find(params[:id])
 		@song.destroy
 
+		flash[:alert] = "Successful delete"
 		redirect_to songs_path
 	end
 
 
 	private
+	def set_song
+		@song = Song.find(params[:id])
+	end
 	def params_screen
 		params.require(:song).permit(:name, :singer, :lyrics)
 	end
