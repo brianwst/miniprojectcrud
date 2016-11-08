@@ -1,10 +1,15 @@
+<div class="container">
 <h1>Songs List</h1>
+<div><%= time_tag(Time.now) %></div>
 
-<table>
+<table class="table table-hover">
 	<tr>
 		<th>Songs</th>
 		<th>Singer</th>
 		<th>Lyrics</th>
+		<th>Actions</th>
+		<th></th>
+		<th></th>
 	</tr>
 
 	<% @songs.each do |song| %>
@@ -12,12 +17,25 @@
 		<th><%= song.name %></th>
 		<th><%= song.singer %></th>
 		<th><%= song.lyrics %></th>
-		<th><%= link_to 'SHOW', song_path(song) %></th>
-		<th><%= link_to 'Edit', edit_song_path(song) %></th>
-		<th><%= link_to 'Delete', song_path(song), method: :delete %></th>
+		<th><%= link_to '', song_path(song), class: "btn btn-info glyphicon glyphicon-zoom-in" %></th>
+		<th><%= link_to '', edit_song_path(song), class: "btn btn-default glyphicon glyphicon-paperclip" %></th>
+		<th><%= link_to '', song_path(song), method: :delete, class: "btn btn-danger glyphicon glyphicon-remove
+" %></th>
 	</tr>
 	<% end  %>
 
 
 </table>
-<%= link_to "New Song", new_song_path %>
+
+
+<h3>New song</h3>
+
+<%= form_for :song, url: songs_path do |f| %>
+	<%= render :partial => 'form', :locals => { :f => f} %>
+  <%= f.submit %>
+
+<% end %>
+
+<%= paginate @songs %>
+
+</div>
