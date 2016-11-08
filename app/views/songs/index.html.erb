@@ -7,9 +7,9 @@
 		<th>Songs</th>
 		<th>Singer</th>
 		<th>Lyrics</th>
-		<th>Actions</th>
-		<th></th>
-		<th></th>
+		<th>Show</th>
+		<th>Edit</th>
+		<th>Delete</th>
 	</tr>
 
 	<% @songs.each do |song| %>
@@ -28,11 +28,12 @@
 </table>
 
 
-<h3>New song</h3>
 
-<%= form_for :song, url: songs_path do |f| %>
+
+<%= form_for :song, url: songs_path, html: {class: "form-inline"} do |f| %>
+  <h3>New song</h3>
 	<%= render :partial => 'form', :locals => { :f => f} %>
-  <%= f.submit %>
+  <%= f.submit class: "btn btn-info" %>
 
 <% end %>
 
