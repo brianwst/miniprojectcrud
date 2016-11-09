@@ -38,10 +38,11 @@ class SongsController < ApplicationController
 	end
 
 	def destroy
+
 		@song.destroy
 
 		flash[:alert] = "Successful delete"
-		redirect_to songs_path
+		redirect_to songs_path(page: params[:page])
 	end
 
 
